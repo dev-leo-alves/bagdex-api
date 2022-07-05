@@ -1,0 +1,21 @@
+{
+  "name": "bagdex-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@swc/core": "^1.2.210",
+    "@swc/jest": "^0.2.21",
+    "@types/jest": "^28.1.4",
+    "@types/node": "^18.0.1",
+    "jest": "^28.1.2",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}
