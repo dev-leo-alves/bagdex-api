@@ -56,7 +56,7 @@
 <br/>
 
 # 🥷 Autor
-## leonardo.jsx 🎯 
+### leonardo.jsx 🎯 
 ### Contato:
 
 - [Linkedin](https://www.linkedin.com/in/leonardo-alves-35a7281a0/)
