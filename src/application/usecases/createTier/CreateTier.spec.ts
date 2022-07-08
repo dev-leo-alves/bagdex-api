@@ -1,6 +1,6 @@
 import { Tier } from "../../../domain/entities/Tier";
 
-import { InMemoryTiersRepository } from "../../../tests/InMemoryTiersRepository";
+import { InMemoryTiersRepository } from "../../repositories/tests/InMemoryTiersRepository";
 import { CreateTier } from "./CreateTier"
 
 describe("Create tier use case", ()=>{
