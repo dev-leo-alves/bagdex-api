@@ -6,7 +6,7 @@ type TierProps ={
 }
 
 export class Tier extends Entity<TierProps>{
-    private constructor(props: TierProps, id?:string){
+    private constructor(props: TierProps, id?: string){
         super(props, id)
     }
 
