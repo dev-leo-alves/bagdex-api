@@ -1,4 +1,3 @@
-import { Tier } from "../../../domain/entities/Tier";
 import {TiersRepository} from "../../repositories/TiersRepository"
  
 type CreateTierRequest={
@@ -12,14 +11,13 @@ export class CreateTier{
     ){}
 
     async execute({name, url}: CreateTierRequest){
-        const tierExist = await this.tiersRepository.findByName(name)
+        const tierNameExists = await this.tiersRepository.findByName(name)
 
-        if(tierExist){
+        if(tierNameExists){
             throw new Error("Tier already exists.")
         }
-
-        const tier = Tier.create({
-            name,
+        const tier = await this.tiersRepository.create({
+            name, 
             url
         })
 
