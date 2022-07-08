@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+case `uname` in
+    *CYGWIN*|*MINGW*|*MSYS*) exit 0;;
+esac
+. "$(dirname -- "$0")/_/husky.sh"
+
+exec < /dev/tty && git cz --hook || true
