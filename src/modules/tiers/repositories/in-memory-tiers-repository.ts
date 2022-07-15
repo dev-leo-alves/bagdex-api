@@ -12,6 +12,10 @@ export class InMemoryTiersRepository implements TiersRepository{
       return this.items.find(tier => tier.id === id);
     }
 
+    async findAll(): Promise<Tier[]> {
+      return this.items
+    }
+
     async create(tier: Tier): Promise<void> {
       this.items.push(tier)
     }

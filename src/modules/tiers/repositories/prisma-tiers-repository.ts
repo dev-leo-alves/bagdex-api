@@ -29,6 +29,17 @@ export class PrismaTiersRepository implements TiersRepository{
         return TierMapper.toDomain(tier)
     }
 
+    async findAll(): Promise<Tier[]> {
+        const tiers = await prisma.tier.findMany({
+           orderBy:{
+                id: "asc"
+           }
+        })
+
+        return tiers.map(tier=> TierMapper.toDomain(tier))
+    }
+
+
 
     async create(tier: Tier): Promise<void>{
         const {name, url} = await TierMapper.toPersistence(tier)
