@@ -15,23 +15,23 @@
    it('should be able to get all tags', async () => {
 
  
-     await prisma.tier.createMany({
-       data: [
-          {
-            name: 'Tier 01',
-            url: 'https://www.validurl/1'
-          },
-          {
-            name: 'Tier 02',
-            url: 'https://www.validurl/2'
-          },
-          {
-            name: 'Tier 03',
-            url: 'https://www.validurl/3'
-          },
-        ],
-        skipDuplicates: true,
-     })
+    //  await prisma.tier.createMany({
+    //    data: [
+    //       {
+    //         name: 'Tier 01',
+    //         url: 'https://www.validurl/1'
+    //       },
+    //       {
+    //         name: 'Tier 02',
+    //         url: 'https://www.validurl/2'
+    //       },
+    //       {
+    //         name: 'Tier 03',
+    //         url: 'https://www.validurl/3'
+    //       },
+    //     ],
+    //     skipDuplicates: true,
+    //  })
  
      const response = await request(app)
        .get('/api/tiers')
