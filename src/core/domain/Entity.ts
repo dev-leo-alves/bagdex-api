@@ -1,7 +1,7 @@
-import crypto from "crypto"
+import { v4 as uuid } from 'uuid'
 
 export abstract class Entity<T> {
-    protected _id: string;
+    protected _id: number | string;
     public props: T;
 
     
@@ -10,8 +10,20 @@ export abstract class Entity<T> {
     }
     
 
-    constructor(props: T, id?:string){
+    constructor(props: T, id?:number | string){
         this.props = props;
-        this._id = id ?? crypto.randomUUID();
+        this._id = id || uuid();
+    }
+
+    public equals(object?: Entity<T>): boolean{
+        if(object === null || object === undefined){
+            return false
+        }
+
+        if(this === object){
+            return false
+        }
+
+        return this._id === object._id;
     }
 }
