@@ -1,7 +1,9 @@
-import { HttpResponse } from './http-response'
+import { HttpResponse, HttpErrorResponse} from './http-response'
 import { ServerError } from '../errors/server-error'
 
-export const badRequest = (error: Error): HttpResponse => ({
+
+
+export const badRequest = (error: Error): HttpErrorResponse => ({
   statusCode: 400,
   body: {
     error: error.message
