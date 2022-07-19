@@ -2,11 +2,12 @@ import { CreateTierController } from './create-tier-controller'
 import { MissingParamError } from '../../../../core/infra/errors/missing-param-error'
 import { ServerError } from '../../../../core/infra/errors/server-error'
 import { CreateTier } from '../../use-cases/create-tier/create-tier-use-case'
-import { InvalidUrlError } from '../../../../core/domain/entities/errors/invalid-url'
 import { InvalidNameError } from '../../../../core/domain/entities/errors/invalid-name'
 import { Tier } from '../../domain/entities/tier'
 import { InMemoryTiersRepository } from '../../repositories/in-memory-tiers-repository'
 import { TiersRepository } from '../../repositories/tiers-repository'
+import {HttpErrorResponse} from "../../../../core/infra/http/http-response"
+import { InvalidIdError } from '../../../../core/domain/entities/errors/invalid-id'
 
 type SutType ={
   tiersRepository: TiersRepository
@@ -29,53 +30,53 @@ describe('Create Tier Controller', () => {
     const {sut} = makeSut()
     const httpRequest = {
       body: {
-        url: 'https://www.validurl.com'
+        id: 1
       }
     }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('name').message)
+    const httpError: HttpErrorResponse = await sut.handle(httpRequest)
+    expect(httpError.statusCode).toBe(400)
+    expect(httpError.body.error).toEqual(new MissingParamError('name').message)
   })
 
-  test('should return 400 if no url is provided', async () => {
+  test('should return 400 if no id is provided', async () => {
     const {sut} = makeSut()
     const httpRequest = {
       body: {
         name: 'any_name'
       }
     }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('url').message)
+    const httpError: HttpErrorResponse = await sut.handle(httpRequest)
+    expect(httpError.statusCode).toBe(400)
+    expect(httpError.body.error).toEqual(new MissingParamError('id').message)
   })
 
-  test('should return 400 if an invalid url is provided', async () => {
+  test('should return 400 if an invalid id is provided', async () => {
     const {sut} = makeSut()
     
     const httpRequest = {
       body: {
+        id: -1,
         name: "any_name",
-        url: "invalid_url",
       }
     }
 
-    const httpResponse = await sut.handle(httpRequest)
-
-    expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new InvalidUrlError(httpRequest.body.url).message)
+    const httpError: HttpErrorResponse = await sut.handle(httpRequest)
+    
+    expect(httpError.statusCode).toBe(400)
+    expect(httpError.body.error).toEqual(new InvalidIdError(httpRequest.body.id).message)
   })
 
   test('should return 400 if an invalid name is provided', async () => {
     const {sut} = makeSut()
     const httpRequest = {
       body: {
+        id: 1,
         name: 'O',
-        url: 'https://www.validurl.com'
       }
     }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new InvalidNameError(httpRequest.body.name).message)
+    const httpError: HttpErrorResponse = await sut.handle(httpRequest)
+    expect(httpError.statusCode).toBe(400)
+    expect(httpError.body.error).toEqual(new InvalidNameError(httpRequest.body.name).message)
   })
 
   test('should return 500 if create tier throws', async () => {
@@ -85,14 +86,14 @@ describe('Create Tier Controller', () => {
     })
     const httpRequest = {
       body: {
+        id: 1,
         name: 'anyName',
-        url: 'https://www.anyurl.com'
       }
     }
 
-    const response = await sut.handle(httpRequest)
-    expect(response.statusCode).toEqual(500)
-    expect((response.body as ServerError).message).toEqual('Server error: internal.')
+    const httpError = await sut.handle(httpRequest)
+    expect(httpError.statusCode).toEqual(500)
+    expect((httpError.body as ServerError).message).toEqual('Server error: internal.')
   })
 
 })
