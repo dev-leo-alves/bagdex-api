@@ -42,13 +42,18 @@ export class PrismaTiersRepository implements TiersRepository{
 
 
     async create(tier: Tier): Promise<void>{
-        const {name, url} = await TierMapper.toPersistence(tier)
+        const {id, name, url} = await TierMapper.toPersistence(tier)
 
         await prisma.tier.create({
             data:{
+                id,
                 name,
                 url
             }
         })
     };
+
+    async count(): Promise<number> {
+        return await prisma.tier.count()
+    }
 }

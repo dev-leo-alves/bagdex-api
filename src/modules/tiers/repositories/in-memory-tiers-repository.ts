@@ -20,5 +20,9 @@ export class InMemoryTiersRepository implements TiersRepository{
       this.items.push(tier)
     }
 
+    async count(): Promise<number> {
+      return this.items.length
+    }
+
    
 }

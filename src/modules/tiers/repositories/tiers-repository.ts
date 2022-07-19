@@ -5,4 +5,5 @@ export interface TiersRepository{
     findById(id: number): Promise<Tier>;
     findAll(): Promise<Tier[]>;
     create(tier: Tier): Promise<void>;
+    count(): Promise<number>;
 }
