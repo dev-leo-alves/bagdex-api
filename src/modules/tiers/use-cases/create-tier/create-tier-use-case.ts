@@ -6,16 +6,28 @@ import { Tier } from "../../domain/entities/tier"
 import { Name } from "../../../../core/domain/entities/name"
 import { Url } from "../../../../core/domain/entities/url"
 import { TierAlreadyExistsError } from "./errors/tier-already-exists-erros"
-
+import { Id } from "../../../../core/domain/entities/id"
+import { urlGenerator } from "../../../../utils/url-generator"
 export class CreateTier{
     constructor(private tiersRepository: TiersRepository){}
 
-    async execute({name, url}: CreateTierDTO): Promise<CreateTierResponseDTO> {
+    async execute({id, name}: CreateTierDTO): Promise<CreateTierResponseDTO> {
+
+        const idOrError = Id.create(id)
+        if (idOrError.isLeft()) {
+            return left(idOrError.value)
+        }
 
         const nameOrError = Name.create(name)
         if (nameOrError.isLeft()) {
             return left(nameOrError.value)
         }
+
+
+        const url = urlGenerator({
+            id: id, 
+            moduleName:"tier"
+        })
 
         const urlOrError = Url.create(url)
         if (urlOrError.isLeft()) {
@@ -24,6 +36,7 @@ export class CreateTier{
 
 
         const tierOrError = Tier.create({
+            id: idOrError.value,
             name: nameOrError.value,
             url: urlOrError.value
         })

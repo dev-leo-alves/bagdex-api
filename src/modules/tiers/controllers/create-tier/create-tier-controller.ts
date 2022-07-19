@@ -14,19 +14,25 @@ export class CreateTierController implements Controller {
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
       try{
        
-          if (!httpRequest.body.name || !httpRequest.body.url) {
-              const field = !httpRequest.body.name ? 'name' : 'url'
+          if (!httpRequest.body.name || !httpRequest.body.id) {
+              const field = !httpRequest.body.name ? 'name' : 'id'
               return badRequest(new MissingParamError(field))
           }
            
-          const tier = { name: httpRequest.body.name, url: httpRequest.body.url }
+          const tier = {id: httpRequest.body.id, name: httpRequest.body.name }
           const createTierResponse: CreateTierResponseDTO = await this.createTier.execute(tier)
-
           if (createTierResponse.isLeft()) {
             return badRequest(createTierResponse.value)
           }
-          
-          return ok(tier)
+          const tierProps =  createTierResponse.value.props
+
+          const tierHttpResponse = {
+            id: tierProps.id.value,
+            name: tierProps.name.value,
+            url: tierProps.url.value
+          }
+
+          return ok(tierHttpResponse)
 
       }catch(error){ 
         return serverError('internal')
