@@ -3,10 +3,12 @@ import { InvalidNameError } from "../../../core/domain/entities/errors/invalid-n
 import { InvalidUrlError } from "../../../core/domain/entities/errors/invalid-url"
 import { TierAlreadyExistsError } from "../use-cases/create-tier/errors/tier-already-exists-erros"
 import { Tier } from "../domain/entities/tier"
+import { InvalidIdError } from "../../../core/domain/entities/errors/invalid-id"
 
 export type CreateTierResponseDTO = Either< 
+    | InvalidIdError
     | InvalidNameError
-    | InvalidUrlError 
+    | InvalidUrlError
     | TierAlreadyExistsError, 
     Tier
 >
