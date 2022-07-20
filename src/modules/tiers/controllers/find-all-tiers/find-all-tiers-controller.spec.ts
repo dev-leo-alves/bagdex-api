@@ -1,17 +1,13 @@
 /**
- * @jest-enviroment ./prisma/prisma-environment-jest
+ * @jest-environment ./prisma/prisma-environment-jest
  */
 
-import { app } from '../../../../app'
+ import { app } from '../../../../app'
  import { prisma } from '../../../../prisma'
  import request from "supertest"
 
  describe('Get All Tiers (e2e)', () => {
  
-  afterAll(async () => {
-    await prisma.$disconnect()
-  })
-
   it('should be able to get all tags', async () => {
    
     await prisma.tier.createMany({
@@ -38,10 +34,10 @@ import { app } from '../../../../app'
     const response = await request(app)
     .get('/api/tiers')
     .send()
-    console.log(response)
+
     expect(response.status).toBe(200)
-    expect(response).toEqual({
-      data: [
+    expect(response.body).toEqual({
+      tiers: [
         expect.objectContaining({
           id: 1,
           name: 'Tier 01',
