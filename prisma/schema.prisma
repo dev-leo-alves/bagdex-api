@@ -12,5 +12,5 @@ model Tier {
     name String @unique
     url  String @unique
 
-    @@map("tier")
+    @@map("tiers")
 }
