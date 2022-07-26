@@ -12,7 +12,7 @@ export class FindAllTiersController implements Controller {
 
       const tiers = result.map(tier => {
         return {
-          id: tier.id,
+          id: tier.props.id.value,
           name: tier.name.value,
           url: tier.url.value
         }

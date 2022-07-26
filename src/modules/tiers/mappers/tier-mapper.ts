@@ -13,7 +13,6 @@ export class TierMapper {
     const urlOrError = Url.create(raw.url)
     const idOrError = Id.create(raw.id)
 
-
     if (nameOrError.isLeft()) {
       throw new InvalidNameError(raw.name)
     }
@@ -45,9 +44,9 @@ export class TierMapper {
 
   static async toPersistence(tier: Tier) {
     return {
-      id: tier.id,
-      name: tier.name.value,
-      url: tier.url.value,
+      id: tier.props.id.value,
+      name: tier.props.name.value,
+      url: tier.props.url.value,
     }
   }
 }

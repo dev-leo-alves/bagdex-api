@@ -6,14 +6,15 @@ import { TierMapper } from "../mappers/tier-mapper";
 export class PrismaTiersRepository implements TiersRepository{
 
     async findByName(name: string): Promise<Tier> {
+       
         const tier = await prisma.tier.findUnique({
             where: { name },
         })
-
+        
         if(!tier){
             return null
         }
-        
+
         return TierMapper.toDomain(tier)
     }
  
@@ -35,7 +36,7 @@ export class PrismaTiersRepository implements TiersRepository{
                 id: "asc"
            }
         })
-
+        
         return tiers.map(tier=> TierMapper.toDomain(tier))
     }
 

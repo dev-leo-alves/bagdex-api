@@ -9,7 +9,6 @@ export class FindAllTiers{
     async execute(): Promise<FindAllTiersResponse> {
       
         const tiers = await this.tiersRepository.findAll()
-
         return tiers
     }
 }

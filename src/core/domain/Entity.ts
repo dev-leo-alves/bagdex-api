@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { Id } from './entities/id';
 
 export abstract class Entity<T> {
     protected _id: number;

@@ -12,8 +12,9 @@ export class CreateTier{
     constructor(private tiersRepository: TiersRepository){}
 
     async execute({id, name}: CreateTierDTO): Promise<CreateTierResponseDTO> {
-
+       
         const idOrError = Id.create(id)
+
         if (idOrError.isLeft()) {
             return left(idOrError.value)
         }
@@ -49,7 +50,7 @@ export class CreateTier{
         const tier = tierOrError.value
 
         const tierExists = await this.tiersRepository.findByName(tier.name.value)
-
+        
         if(tierExists){
             return left(new TierAlreadyExistsError(tier.name.value))
         }
