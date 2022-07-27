@@ -1,7 +1,7 @@
 import { Entity } from "../../../../core/domain/entity";
 import { right } from "../../../../core/shared/either";
 import { TierDTO } from "../../dtos/tier-dto";
-import { CreateDTO } from "../../dtos/create-dto";
+import { CreateTierDTO } from "../../dtos/create-tier-dto";
 
 export class Tier extends Entity<TierDTO>{
 
@@ -18,7 +18,7 @@ export class Tier extends Entity<TierDTO>{
         Object.freeze(this)
     }
 
-    static create(props: TierDTO, id?: number): CreateDTO {
+    static create(props: TierDTO, id?: number): CreateTierDTO {
         const tier = new Tier(props, id)
         return right(tier)
     }
