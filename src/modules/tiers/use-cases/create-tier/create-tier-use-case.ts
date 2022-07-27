@@ -1,5 +1,5 @@
 import {TiersRepository} from "../../repositories/tiers-repository"
-import { CreateTierDTO } from "../../dtos/create-tier-dto"
+import { RawTierDTO } from "../../dtos/raw-tier-dto"
 import { CreateTierResponseDTO } from "../../dtos/create-tier-response-dto"
 import { left, right } from "../../../../core/shared/either"
 import { Tier } from "../../domain/entities/tier"
@@ -11,7 +11,7 @@ import { urlGenerator } from "../../../../utils/url-generator"
 export class CreateTier{
     constructor(private tiersRepository: TiersRepository){}
 
-    async execute({id, name}: CreateTierDTO): Promise<CreateTierResponseDTO> {
+    async execute({id, name}: RawTierDTO): Promise<CreateTierResponseDTO> {
        
         const idOrError = Id.create(id)
 
