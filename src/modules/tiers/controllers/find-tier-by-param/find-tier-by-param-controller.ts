@@ -1,7 +1,7 @@
 import { Controller } from '../../../../core/infra/controller'
 import { HttpResponse } from '../../../../core/infra/http/http-response'
 import { serverError, ok } from '../../../../core/infra/http/http-helper'
-import { FindTierByParam } from '../../use-cases/find-tier-by-param/find-tier-by-param-use-case'
+import { FindTierByParam } from '../../use-cases/requests/find-tier-by-param/find-tier-by-param-use-case'
 import { HttpRequest } from '../../../../core/infra/http/http-request'
 
 export class FindTierByParamController implements Controller {
