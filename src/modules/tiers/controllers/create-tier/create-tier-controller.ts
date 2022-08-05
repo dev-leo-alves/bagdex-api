@@ -1,8 +1,8 @@
 import { Controller } from '../../../../core/infra/controller'
 import { HttpResponse } from '../../../../core/infra/http/http-response'
 import { HttpRequest } from '../../../../core/infra/http/http-request';
-import { CreateTierResponseDTO } from '../../dtos/create-tier-response-dto';
-import { CreateTier } from '../../use-cases/create-tier/create-tier-use-case';
+import { CreateTierResponseDTO } from '../../dtos/create-tier/create-tier-response-dto';
+import { CreateTier } from '../../use-cases/requests/create-tier/create-tier-use-case';
 import { badRequest, serverError, ok } from '../../../../core/infra/http/http-helper';
 import { MissingParamError } from '../../../../core/infra/errors/missing-param-error';
 

@@ -1,7 +1,7 @@
 import { CreateTierController } from './create-tier-controller'
 import { MissingParamError } from '../../../../core/infra/errors/missing-param-error'
 import { ServerError } from '../../../../core/infra/errors/server-error'
-import { CreateTier } from '../../use-cases/create-tier/create-tier-use-case'
+import { CreateTier } from '../../use-cases/requests/create-tier/create-tier-use-case'
 import { InvalidNameError } from '../../../../core/domain/entities/errors/invalid-name'
 import { Tier } from '../../domain/entities/tier'
 import { InMemoryTiersRepository } from '../../repositories/in-memory-tiers-repository'
