@@ -1,7 +1,7 @@
-import { CreateTierController } from './update-tier-controller'
+import { UpdateTierController } from './update-tier-controller'
 import { MissingParamError } from '../../../../core/infra/errors/missing-param-error'
 import { ServerError } from '../../../../core/infra/errors/server-error'
-import { CreateTier } from '../../use-cases/create-tier/create-tier-use-case'
+import { UpdateTier } from '../../use-cases/requests/update-tier/update-tier-use-case'
 import { InvalidNameError } from '../../../../core/domain/entities/errors/invalid-name'
 import { Tier } from '../../domain/entities/tier'
 import { InMemoryTiersRepository } from '../../repositories/in-memory-tiers-repository'
@@ -11,18 +11,18 @@ import { InvalidIdError } from '../../../../core/domain/entities/errors/invalid-
 
 type SutType ={
   tiersRepository: TiersRepository
-  createTierStub: CreateTier
-  sut: CreateTierController
+  updateTierStub: UpdateTier
+  sut: UpdateTierController
 }
 
 const makeSut = (): SutType => {
     var tiers: Tier[] = []
     const tiersRepository: TiersRepository = new InMemoryTiersRepository(tiers);
 
-    const createTierStub = new CreateTier(tiersRepository)
-    const sut = new CreateTierController(createTierStub)
+    const updateTierStub = new UpdateTier(tiersRepository)
+    const sut = new UpdateTierController(updateTierStub)
 
-    return {sut, createTierStub, tiersRepository}
+    return {sut, updateTierStub, tiersRepository}
 }
 
 describe('Create Tier Controller', () => {
@@ -80,8 +80,8 @@ describe('Create Tier Controller', () => {
   })
 
   test('should return 500 if create tier throws', async () => {
-    const {sut, createTierStub} = makeSut()
-    jest.spyOn(createTierStub, 'execute').mockImplementation(() => {
+    const {sut, updateTierStub} = makeSut()
+    jest.spyOn(updateTierStub, 'execute').mockImplementation(() => {
       throw new Error()
     })
     const httpRequest = {
