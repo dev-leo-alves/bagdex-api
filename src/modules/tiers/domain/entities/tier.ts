@@ -1,7 +1,7 @@
 import { Entity } from "../../../../core/domain/entity";
 import { right } from "../../../../core/shared/either";
 import { TierDTO } from "../../dtos/tier-dto";
-import { CreateTierDTO } from "../../dtos/create-tier-dto";
+import { CreateTierDTO } from "../../dtos/create-tier/create-tier-dto";
 
 export class Tier extends Entity<TierDTO>{
 
