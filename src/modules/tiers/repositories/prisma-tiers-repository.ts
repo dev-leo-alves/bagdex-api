@@ -2,6 +2,7 @@ import { prisma } from "../../../prisma";
 import { TiersRepository } from "./tiers-repository";
 import { Tier } from "../domain/entities/tier";
 import { TierMapper } from "../mappers/tier-mapper";
+import { FindAllTiersDTO } from "../dtos/find-all-tiers/find-all-tiers-dto";
 
 export class PrismaTiersRepository implements TiersRepository{
 
@@ -30,31 +31,42 @@ export class PrismaTiersRepository implements TiersRepository{
         return TierMapper.toDomain(tier)
     }
 
-    async findAll(): Promise<Tier[]> {
-        const tiers = await prisma.tier.findMany({
-           orderBy:{
+    async findAll(): Promise<FindAllTiersDTO> {
+        const count = await prisma.tier.count()
+        const tiers  = await prisma.tier.findMany({
+            orderBy:{
                 id: "asc"
-           }
+            },
         })
-        
-        return tiers.map(tier=> TierMapper.toDomain(tier))
+        const tierEntities = tiers.map(tier=> TierMapper.toDomain(tier))
+
+        return {count, tiers: tierEntities}
     }
 
 
 
     async create(tier: Tier): Promise<void>{
-        const {id, name, url} = await TierMapper.toPersistence(tier)
+        const data = await TierMapper.toPersistence(tier)
 
         await prisma.tier.create({
-            data:{
-                id,
-                name,
-                url
-            }
+            data
         })
     };
 
+    async patch(id: number, tier?: Tier): Promise<void> {
+        const data = await TierMapper.toPersistence(tier)
+        await prisma.tier.update({
+          where: {
+            id,
+          },
+          data
+        })
+    }
+
     async count(): Promise<number> {
-        return await prisma.tier.count()
+        
+         const counter = await prisma.tier.count()
+         console.log(counter)
+         return counter
     }
 }
