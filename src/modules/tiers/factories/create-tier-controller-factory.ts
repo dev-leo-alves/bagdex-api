@@ -1,6 +1,6 @@
 import { Controller } from '../../../core/infra/controller'
 import { PrismaTiersRepository } from '../repositories/prisma-tiers-repository'
-import { CreateTier } from '../use-cases/create-tier/create-tier-use-case'
+import { CreateTier } from '../use-cases/requests/create-tier/create-tier-use-case'
 import { CreateTierController } from '../controllers/create-tier/create-tier-controller'
 
 export function makeCreateTierController(): Controller {
