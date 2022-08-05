@@ -1,12 +1,12 @@
 import { Controller } from '../../../core/infra/controller'
 import { PrismaTiersRepository } from '../repositories/prisma-tiers-repository'
-import { CreateTier } from '../use-cases/create-tier/create-tier-use-case'
-import { CreateTierController } from '../controllers/create-tier/create-tier-controller'
+import { UpdateTier } from '../use-cases/requests/update-tier/update-tier-use-case'
+import { UpdateTierController } from '../controllers/update-tier/update-tier-controller'
 
-export function makeCreateTierController(): Controller {
+export function makeUpdateTierController(): Controller {
   const prismaTiersRepository = new PrismaTiersRepository()
-  const createTier = new CreateTier(prismaTiersRepository)
-  const createTierController = new CreateTierController(createTier)
+  const updateTier = new UpdateTier(prismaTiersRepository)
+  const updateTierController = new UpdateTierController(updateTier)
 
-  return createTierController
+  return updateTierController
 }
