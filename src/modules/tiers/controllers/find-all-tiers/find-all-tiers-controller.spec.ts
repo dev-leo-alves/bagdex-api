@@ -1,5 +1,5 @@
 import { TiersRepository } from '../../repositories/tiers-repository'
-import { FindAllTiers } from '../../use-cases/find-all-tiers/find-all-tiers-use-case'
+import { FindAllTiers } from '../../use-cases/requests/find-all-tiers/find-all-tiers-use-case'
 import { FindAllTiersController } from './find-all-tiers-controller'
 import { InMemoryTiersRepository } from '../../repositories/in-memory-tiers-repository'
 import { Tier } from '../../domain/entities/tier'
