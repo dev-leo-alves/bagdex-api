@@ -1,3 +1,6 @@
+/** 
+ * @jest-environment ./prisma/prisma-environment-jest 
+ **/
 import { Tier } from "../../../domain/entities/tier";
 import { InMemoryTiersRepository } from "../../../repositories/in-memory-tiers-repository";
 import { UpdateTier } from "./update-tier-use-case"

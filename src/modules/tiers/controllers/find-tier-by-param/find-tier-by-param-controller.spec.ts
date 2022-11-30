@@ -1,3 +1,6 @@
+/** 
+ * @jest-environment ./prisma/prisma-environment-jest 
+ **/
 import { TiersRepository } from '../../repositories/tiers-repository'
 import { FindTierByParamController } from './find-tier-by-param-controller'
 import { InMemoryTiersRepository } from '../../repositories/in-memory-tiers-repository'

@@ -1,4 +1,4 @@
-import { Entity } from "../../../../core/domain/entity";
+import { Entity } from "../../../../core/domain/Entity";
 import { right } from "../../../../core/shared/either";
 import { TierDTO } from "../../dtos/tier-dto";
 import { CreateTierDTO } from "../../dtos/create-tier/create-tier-dto";

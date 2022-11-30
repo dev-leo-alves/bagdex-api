@@ -1,3 +1,6 @@
+/** 
+ * @jest-environment ./prisma/prisma-environment-jest 
+ **/
 import { TiersRepository } from '../../repositories/tiers-repository'
 import { FindAllTiers } from '../../use-cases/requests/find-all-tiers/find-all-tiers-use-case'
 import { FindAllTiersController } from './find-all-tiers-controller'

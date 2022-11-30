@@ -1,3 +1,6 @@
+/** 
+ * @jest-environment ./prisma/prisma-environment-jest 
+ **/
 import { Tier } from "../../../domain/entities/tier";
 import { Either, left, right } from "../../../../../core/shared/either";
 import { InvalidUrlError } from "../../../../../core/domain/entities/errors/invalid-url";

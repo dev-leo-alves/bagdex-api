@@ -1,3 +1,6 @@
+/** 
+ * @jest-environment ./prisma/prisma-environment-jest 
+ **/
 import { UpdateTierController } from './update-tier-controller'
 import { MissingParamError } from '../../../../core/infra/errors/missing-param-error'
 import { ServerError } from '../../../../core/infra/errors/server-error'

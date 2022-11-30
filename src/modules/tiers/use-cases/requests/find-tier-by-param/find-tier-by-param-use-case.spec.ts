@@ -1,3 +1,6 @@
+/** 
+ * @jest-environment ./prisma/prisma-environment-jest 
+ **/
 import { Name } from '../../../../../core/domain/entities/name'
 import { Url } from '../../../../../core/domain/entities/url'
 import { Id } from '../../../../../core/domain/entities/id'

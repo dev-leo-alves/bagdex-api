@@ -19,18 +19,19 @@ class CustomEnvironment extends NodeEnvironment {
   setup() {
     process.env.DATABASE_URL = this.connectionString;
     this.global.process.env.DATABASE_URL = this.connectionString;
-    execSync('prisma migrate dev');
+
+    execSync(`prisma migrate dev`);
   }
 
-  // async teardown() {
-  //   const client = new Client({
-  //     connectionString: this.connectionString,
-  //   });
+  async teardown() {
+    const client = new Client({
+      connectionString: this.connectionString,
+    });
 
-  //   await client.connect();
-  //   await client.query(`DROP SCHEMA IF EXISTS "${this.schema}" CASCADE`);
-  //   await client.end();
-  // }
+    await client.connect();
+    await client.query(`DROP SCHEMA IF EXISTS "${this.schema}" CASCADE`);
+    await client.end();
+  }
 }
 
 module.exports = CustomEnvironment;
