@@ -9,33 +9,34 @@ import { Tier } from '../../domain/entities/tier'
 import { HttpResponse } from '../../../../core/infra/http/http-response'
 
 
-type SutType ={
+type SutType = {
   tiersRepository: TiersRepository
   findAllTiersStub: FindAllTiers
   sut: FindAllTiersController
 }
 
 const makeSut = (): SutType => {
-    var tiers: Tier[] = []
-    const tiersRepository: TiersRepository = new InMemoryTiersRepository(tiers);
+  var tiers: Tier[] = []
+  const tiersRepository: TiersRepository = new InMemoryTiersRepository(tiers);
 
-    const findAllTiersStub = new FindAllTiers(tiersRepository)
-    const sut = new FindAllTiersController(findAllTiersStub)
+  const findAllTiersStub = new FindAllTiers(tiersRepository)
+  const sut = new FindAllTiersController(findAllTiersStub)
 
-    return {sut, findAllTiersStub, tiersRepository}
+  return { sut, findAllTiersStub, tiersRepository }
 }
 
 
- describe('Get All Tiers', () => {
+describe('Get All Tiers', () => {
 
   it('should be able to get all tags', async () => {
-    const {sut} = makeSut()
+    const { sut } = makeSut()
 
     const httpResponse: HttpResponse = await sut.handle()
     expect(httpResponse.statusCode).toBe(200)
     expect(httpResponse.body).toEqual({
-      tiers: [],
+      count: 0,
+      results: []
     })
   })
- 
+
 })

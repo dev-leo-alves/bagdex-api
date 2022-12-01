@@ -1,4 +1,4 @@
-import {TiersRepository} from "../../../repositories/tiers-repository"
+import { TiersRepository } from "../../../repositories/tiers-repository"
 import { RawTierDTO } from "../../../dtos/raw-tier-dto"
 import { CreateTierResponseDTO } from "../../../dtos/create-tier/create-tier-response-dto"
 import { left, right } from "../../../../../core/shared/either"
@@ -8,11 +8,11 @@ import { Url } from "../../../../../core/domain/entities/url"
 import { TierAlreadyExistsError } from "../../errors/tier-already-exists-error"
 import { Id } from "../../../../../core/domain/entities/id"
 import { urlGenerator } from "../../../../../utils/url-generator"
-export class CreateTier{
-    constructor(private tiersRepository: TiersRepository){}
+export class CreateTier {
+    constructor(private tiersRepository: TiersRepository) { }
 
-    async execute({id, name}: RawTierDTO): Promise<CreateTierResponseDTO> {
-       
+    async execute({ id, name }: RawTierDTO): Promise<CreateTierResponseDTO> {
+
         const idOrError = Id.create(id)
 
         if (idOrError.isLeft()) {
@@ -26,8 +26,8 @@ export class CreateTier{
 
 
         const url = urlGenerator({
-            id: id, 
-            moduleName:"tier"
+            id: id,
+            moduleName: "tier"
         })
 
         const urlOrError = Url.create(url)
@@ -43,15 +43,15 @@ export class CreateTier{
         })
 
 
-        if(tierOrError.isLeft()){
+        if (tierOrError.isLeft()) {
             return left(tierOrError.value)
-        } 
+        }
 
         const tier = tierOrError.value
 
         const tierExists = await this.tiersRepository.findByName(tier.name.value)
-        
-        if(tierExists){
+
+        if (tierExists) {
             return left(new TierAlreadyExistsError(tier.name.value))
         }
 

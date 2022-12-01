@@ -1,7 +1,7 @@
 const NodeEnvironment = require('jest-environment-node').default;
 import { v4 as uuid } from 'uuid';
 import { Client } from 'pg';
-import { execSync } from 'child_process';
+import { exec } from 'child_process';
 import { config } from 'dotenv';
 import { resolve } from 'path';
 
@@ -13,14 +13,14 @@ class CustomEnvironment extends NodeEnvironment {
   constructor(config) {
     super(config);
     this.schema = `code_schema_${uuid()}`;
-    this.connectionString = `${process.env.DATABASE_URL}?schema=${this.schema}`;
+    this.connectionString = `${process.env.ENVIRONMENT_DATABASE_URL}`;
   }
 
   setup() {
-    process.env.DATABASE_URL = this.connectionString;
-    this.global.process.env.DATABASE_URL = this.connectionString;
+    process.env.ENVIRONMENT_DATABASE_URL = this.connectionString;
+    this.global.process.env.ENVIRONMENT_DATABASE_URL = this.connectionString;
 
-    execSync(`prisma migrate dev`);
+    exec(`prisma migrate dev`);
   }
 
   async teardown() {

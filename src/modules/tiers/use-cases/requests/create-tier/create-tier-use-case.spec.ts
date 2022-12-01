@@ -2,8 +2,6 @@
  * @jest-environment ./prisma/prisma-environment-jest 
  **/
 import { Tier } from "../../../domain/entities/tier";
-import { Either, left, right } from "../../../../../core/shared/either";
-import { InvalidUrlError } from "../../../../../core/domain/entities/errors/invalid-url";
 import { InMemoryTiersRepository } from "../../../repositories/in-memory-tiers-repository";
 import { CreateTier } from "./create-tier-use-case"
 import { TiersRepository } from "../../../repositories/tiers-repository";
@@ -19,19 +17,19 @@ type SutType = {
 const makeSut = async (): Promise<SutType> => {
     const id = 1
     const name = 'any_name'
-    const url = 'https://www.validurl.com/1'
+
     var tiers: Tier[] = []
     const tiersRepository: TiersRepository = new InMemoryTiersRepository(tiers);
     const sut = new CreateTier(tiersRepository)
-    await sut.execute({ id, name, url })
+    await sut.execute({ id, name })
 
-    return {sut, tiersRepository}
+    return { sut, tiersRepository }
 }
 
 
-describe("Create tier use case", ()=>{
-    test("should not create if name already exists", async ()=>{
-        const {sut} = await makeSut()
+describe("Create tier use case", () => {
+    test("should not create if name already exists", async () => {
+        const { sut } = await makeSut()
         const id = 2
         const name = 'any_name'
 
@@ -40,8 +38,8 @@ describe("Create tier use case", ()=>{
         expect(error.value).toEqual(new TierAlreadyExistsError(name))
     })
 
-    test("should not create if name is invalid", async ()=>{
-        const {sut} = await makeSut()
+    test("should not create if name is invalid", async () => {
+        const { sut } = await makeSut()
         const id = 3
         const name = 'O'
 
@@ -53,7 +51,7 @@ describe("Create tier use case", ()=>{
 
 
     test('should not create tier with invalid id', async () => {
-        const {sut} = await makeSut()
+        const { sut } = await makeSut()
         const id = 0
         const name = 'any_name 5'
 
