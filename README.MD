@@ -51,5 +51,3 @@ A definir
 - [Portfólio](https://dev-leo-alves.vercel.app/)
 - [Linkedin](https://www.linkedin.com/in/leonardo-alves-35a7281a0/)
 - [leo.alvesoliveira2000@gmail.com](mailto:leo.alvesoliveira2000@gmail.com)
-
-### Para seguir o projeto detalhadamente, acesse o link do <a href="https://factual-plum-5a2.notion.site/BAGDEX-API-161a218aa4284825a41fb7b15439514e">Notion da Bagdex API</a> 
