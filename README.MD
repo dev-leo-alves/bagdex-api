@@ -21,10 +21,7 @@
 
 🧵 As seguintes tecnologias foram usadas para construir o projeto:
 
-- 🪡 [NodeJS](https://nodejs.org/en/)
-- 🪢 [Express](https://expressjs.com/pt-br/)
-- 🪡 [TypeScript](https://www.typescriptlang.org/)
-- 🪢 [Prisma](https://www.prisma.io/)
+- 🪡 [Laravel](https://laravel.com/)
 
 <br/>
 
@@ -40,25 +37,18 @@
 
 
 ## 📝 Tarefas 
-
-- [ ] Rota inicial
-- [ ] Rotas de Bagmon
-- [ ] Rotas de Tier
-- [ ] Rotas de Tipo
-- [ ] Armazenamento de Imagem
+A definir
 
 <br/>
 
 ## 🧶 Features 
-- ✅ Arquitetura SOLID;
-- ✅ Testes Unitários
-
+A definir
 <br/>
 
 # 🥷 Autor
-## leonardo.jsx 🎯 
+## Leonardo Alves 🎯 
 ### Contato:
-
+- [Portfólio](https://dev-leo-alves.vercel.app/)
 - [Linkedin](https://www.linkedin.com/in/leonardo-alves-35a7281a0/)
 - [leo.alvesoliveira2000@gmail.com](mailto:leo.alvesoliveira2000@gmail.com)
 
