@@ -1,5 +1,6 @@
-![Banner](/public/git/bagbanner.jpg)
-
+<p align="center">
+  <img src="/public/git/bagbanner.jpg" />
+</p>
 <br/>
 
 # 🐣 BAGDEX API
